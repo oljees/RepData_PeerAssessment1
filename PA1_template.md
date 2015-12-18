@@ -1,10 +1,11 @@
 # Reproducible Research: Peer Assessment 1
+
 ## Introduction
 It is now possible to collect a large amount of data about personal movement using activity monitoring devices such as a Fitbit, Nike Fuelband, or Jawbone Up. These type of devices are part of the "quantified self" movement -- a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. But these data remain under-utilized both because the raw data are hard to obtain and there is a lack of statistical methods and software for processing and interpreting the data.
 
 This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day. 
 
-The data used is forked from the github repo http://github.com/rdpeng/RepData_PeerAssessment1
+The data used is forked and cloned from the github repo http://github.com/rdpeng/RepData_PeerAssessment1
 
 ## Loading and preprocessing the data
 
@@ -38,9 +39,10 @@ tail(activity)
 ```
 
 The dataset contains 3 variables
-. steps: Number of steps taking in a 5-minute interval (missing values are coded as NA)
-. date: The date on which the measurement was taken in YYYY-MM-DD format
-. interval: Identifier for the 5-minute interval in which measurement was taken
+
+- **steps:** Number of steps taking in a 5-minute interval (missing values are coded as NA)
+- **date:** The date on which the measurement was taken in YYYY-MM-DD format
+- **interval:** Identifier for the 5-minute interval in which measurement was taken
 
 and is stored in a comma-separated-value (CSV) file with a total of 17,568 observations.
 
@@ -119,7 +121,7 @@ qplot(total,data=totalsteps,
       fill =I("antiquewhite4"))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+![](PA1_template_files/figure-html/histogram1-1.png) 
 
 From the above code it can be seen that 
 
@@ -150,7 +152,7 @@ p<-ggplot(aes(interval,avg_steps_interval), data=actpattern) +
 p
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-7-1.png) 
+![](PA1_template_files/figure-html/time-series1-1.png) 
 
 To find the five minute interval with the maximum number of steps, first work out the maximum, then extract which five minute interval it ooccured
 
@@ -172,7 +174,7 @@ p<-p+geom_vline(xintercept=as.numeric(max_int),colour="red")
 p + annotate("text",x=1150,y=200,label="maximum average number of steps", color="red")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-8-1.png) 
+![](PA1_template_files/figure-html/time-series2-1.png) 
 
 So the **interval with the maximum number of steps is 835**
 
@@ -273,7 +275,7 @@ qplot(total,data=totalsteps.i,
       fill =I("antiquewhite4"))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-12-1.png) 
+![](PA1_template_files/figure-html/histogram-imputed-1.png) 
 
 
 ```r
@@ -332,5 +334,5 @@ p.i<-ggplot(aes(interval,avg_steps_interval), data=actpattern.i) +
 p.i
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-16-1.png) 
+![](PA1_template_files/figure-html/wkday-activity-1.png) 
 

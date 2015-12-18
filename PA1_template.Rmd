@@ -4,12 +4,17 @@ output:
   html_document:
     keep_md: true
 ---
+```{r global_options, echo=FALSE}
+library(knitr)
+opts_chunk$set(echo=TRUE)
+
+```
 ## Introduction
 It is now possible to collect a large amount of data about personal movement using activity monitoring devices such as a Fitbit, Nike Fuelband, or Jawbone Up. These type of devices are part of the "quantified self" movement -- a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. But these data remain under-utilized both because the raw data are hard to obtain and there is a lack of statistical methods and software for processing and interpreting the data.
 
 This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day. 
 
-The data used is forked from the github repo http://github.com/rdpeng/RepData_PeerAssessment1
+The data used is forked and cloned from the github repo http://github.com/rdpeng/RepData_PeerAssessment1
 
 ## Loading and preprocessing the data
 ```{r}
@@ -19,9 +24,10 @@ tail(activity)
 ```
 
 The dataset contains 3 variables
-. steps: Number of steps taking in a 5-minute interval (missing values are coded as NA)
-. date: The date on which the measurement was taken in YYYY-MM-DD format
-. interval: Identifier for the 5-minute interval in which measurement was taken
+
+- **steps:** Number of steps taking in a 5-minute interval (missing values are coded as NA)
+- **date:** The date on which the measurement was taken in YYYY-MM-DD format
+- **interval:** Identifier for the 5-minute interval in which measurement was taken
 
 and is stored in a comma-separated-value (CSV) file with a total of 17,568 observations.
 
@@ -52,7 +58,7 @@ medtotal<-median(totalsteps$total,na.rm=T)
 ```
 
 Then look at the distribution using a histogram made with ggplot2
-```{r}
+```{r histogram1}
 library(ggplot2)
 qplot(total,data=totalsteps,
       geom="histogram",
@@ -78,7 +84,7 @@ actpattern<-activity%>%
 ```
 
 Then look at the changes in average number of steps per five minute interval
-```{r}
+```{r time-series1}
 library(scales) #to allowscaling axes
 p<-ggplot(aes(interval,avg_steps_interval), data=actpattern) + 
   geom_line(color="blue", size=1) +
@@ -91,7 +97,7 @@ p
 
 To find the five minute interval with the maximum number of steps, first work out the maximum, then extract which five minute interval it ooccured
 
-```{r}
+```{r time-series2}
 max_avg_steps_per_int<-max(actpattern$avg_steps_interval)
 
 #five min interval with average maximum number of steps
@@ -153,7 +159,7 @@ totalsteps.i<-a_i%>%
 
 And plot a histogram
 
-```{r}
+```{r histogram-imputed}
 #histogram of total number of steps per day imputed
 qplot(total,data=totalsteps.i,
       geom="histogram",
@@ -195,7 +201,7 @@ actpattern.i<-a_i%>%
 
 Now we can look at activity pattern by wkday variable
 
-```{r}
+```{r wkday-activity}
 p.i<-ggplot(aes(interval,avg_steps_interval), data=actpattern.i) + 
     geom_line(color="blue", size=1) +
     theme_bw() +
